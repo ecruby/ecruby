@@ -1,0 +1,56 @@
+!measure = 18px
+!font_size = 12px
+
+body
+  :color #fff
+  :background
+    color: #9b1010
+    image: url(/images/background.jpg)
+    repeat: repeat-y
+    position: center 
+    
+p,h2,h3,h4,h5,h6
+  :color #fff
+  :line-height = !measure
+  :margin-bottom = !measure
+  
+h1
+  :line-height = !measure * 2
+
+a
+  :color #fff
+
+#header
+  :text-align right
+  :background-color = #660000
+
+#footerwrap, #navwrap
+  :background-color = #660000
+  
+#contentwrap
+  :padding-top = !measure
+
+#navbar
+  :height = !measure * 2
+  ul
+    :margin 0
+    :padding 0
+    :list-style none
+    
+    li
+      :float left
+      :list-style none
+      :margin 0
+      :display block
+      :background-color #664444
+      :margin-right = 2px
+      :height = !measure * 2
+      :line-height = !measure * 2
+      a:hover, a.current
+        :background-color #B04444
+      a
+        :padding 0 4px
+        :display block
+        :float left
+        :font-size = !font_size + 4
+        :text-decoration none

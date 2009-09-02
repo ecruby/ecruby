@@ -1,0 +1,22 @@
+.grid_7.suffix_1
+  %h1 Jobs
+
+  %h2 Jobs RSS feed
+  %script{'language' => "JavaScript", 'src' => "http://feed2js.org//feed2js.php?src=http%3A%2F%2Ffeeds2.feedburner.com%2Fjobregator&amp;chan=y&amp;num=10&amp;date=y&amp;targ=popup&amp;css=jobs&amp;html=p", 'type'=>"text/javascript"}
+
+  %noscript
+    = link_to "View RSS feed", href="http://feed2js.org//feed2js.php?src=http%3A%2F%2Ffeeds2.feedburner.com%2Fjobregator&amp;chan=y&amp;num=15&amp;date=y&amp;targ=popup&amp;css=jobs&amp;html=y"
+
+.grid_4
+  %h2 Job boards
+  %h4
+    = link_to "jobs.rubynow.com", "http://jobs.rubynow.com"
+  %h4
+    = link_to "WorkingWithRails Job Board", "http://workingwithrails.com/browse/jobs"
+  %h4
+    = link_to "RubyInside Job Board", "http://ruby.jobamatic.com/a/jbb/find-jobs"
+  %h4
+    = link_to "Jobster", "http://www.jobster.com/find/US/jobs/for/ruby"
+  %h4
+    = link_to "Cybercoders Ruby Jobs", "http://www.cybercoders.com/JobSearch.aspx?q=Ruby+on+Rails&l=,&r=&ad=cbsearch"
+  
