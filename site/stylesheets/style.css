@@ -1,59 +1,60 @@
 body {
-  color: #fff;
+  font-size: 12px;
+  color: white;
   background-color: #9b1010;
   background-image: url(/images/background.jpg);
   background-repeat: repeat-y;
   background-position: center; }
 
 p, h2, h3, h4, h5, h6 {
-  color: #fff;
+  color: white;
   line-height: 18px;
-  margin-bottom: 18px; }
+  margin-bottom: !measure; }
 
 h1 {
   line-height: 36px; }
 
 a {
-  color: #fff; }
+  color: white; }
 
 #header {
-  text-align: right;
-  background-color: #660000; }
+  text-align: right; }
 
-#footerwrap, #navwrap {
+#header, #footerwrap, #navwrap {
   background-color: #660000; }
 
 #contentwrap {
   padding-top: 18px; }
 
-#navbar {
+#navbar, #footer {
   height: 36px; }
-  #navbar ul {
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-    #navbar ul li {
-      float: left;
-      list-style: none;
-      margin: 0;
-      display: block;
-      background-color: #664444;
-      margin-right: 2px;
-      height: 36px;
-      line-height: 36px; }
-      #navbar ul li a:hover, #navbar ul li a.current {
-        background-color: #B04444; }
-      #navbar ul li a {
-        padding: 0 4px;
-        display: block;
-        float: left;
-        font-size: 16px;
-        text-decoration: none; }
 
-.promobox {
-  border: 1px solid #660000;
+#navbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  #navbar ul li {
+    float: left;
+    list-style: none;
+    margin: 0;
+    display: block;
+    background-color: #664444;
+    margin-right: 2px;
+    height: 36px;
+    line-height: 36px; }
+    #navbar ul li a {
+      padding: 0 4px;
+      display: block;
+      float: left;
+      font-size: 16px;
+      text-decoration: none; }
+      #navbar ul li a:hover, #navbar ul li a.current {
+        background-color: #b04444; }
+
+.promobox, .box {
+  border: 1px solid #600;
   background: #664444;
-  padding: 18px;
+  padding: 8px;
   margin-bottom: 18px; }
 
 h2 {
