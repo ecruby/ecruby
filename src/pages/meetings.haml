@@ -1,9 +1,67 @@
+- @title = "Meetings"
 .grid_6
   %h1 Meetings
   %p We meet the first Thursday of every month. Our meetings are extremely informal and offer you a chance to meet other developers who are passionate about building awesome things with beautiful code.
   %p If you want to learn Ruby, be sure to bring your laptop to the meeting. Stuck on a problem? Want to show off something cool you've done? Need contributers to your open-source project? Let us know!
 .grid_6
   %h2 Next meeting
+  %img{'src' => "/images/microformat_hcalendar.png"}
+  .vevent
+    %h3{'class' => "summary"}
+      %a{'class' =>"url", 'href'=>"http://www.ecruby.org/"}December ECRuby Meeting
+    .description 
+      %p Planning for the Chippewa Valley Ruby Camp
+    %p
+      %span{'class' => "dtstart", 'title'=> "2009-12-03T17:00:00-05:00"} December 3rd, 2009 from 5:00 PM
+      %span{'class' => "dtend", 'title'=> "2009-12-03T18:30:00-06:30"} to 6:30 PM
+      %br
+      %span{'class' => "location hcard"}
+        %span{'class' => 'fn org'} at Mogie's Pub,
+        %span{'class' => "street-address"} 436 Water St
+        %span{'class' => "locality"}Eau Claire,
+        %span{'class' => "region"} WI
+
+
+.grid_12
+  %h2 Previous meetings
+  
+  %img{'src' => "/images/microformat_hcalendar.png"}
+  .vevent
+    %h3{'class' => "summary"}
+      %a{'class' =>"url", 'href'=>"http://www.ecruby.org/"}November ECRuby Meeting
+    .description 
+      %p Informal meeting. We'll help people get started with a Ruby environment. We'll also help answer questions on getting started with a Rails project.
+      %p Bring your laptop and get hands-on. There are some open-source projects you might be able to hack on if you're interested.
+    %p
+      %span{'class' => "dtstart", 'title'=> "2009-11-05T17:00:00-05:00"} November 5th, 2009 from 5:00 PM
+      %span{'class' => "dtend", 'title'=> "2009-11-05T18:30:00-06:30"} to 6:30 PM
+      %br
+      %span{'class' => "location hcard"}
+        %span{'class' => 'fn org'} at Mogie's Pub,
+        %span{'class' => "street-address"} 436 Water St
+        %span{'class' => "locality"}Eau Claire,
+        %span{'class' => "region"} WI
+  
+  %img{'src' => "/images/microformat_hcalendar.png"}
+  .vevent
+    %h3{'class' => "summary"}
+      %a{'class' =>"url", 'href'=>"http://www.ecruby.org/"}October ECRuby Meeting
+    .description 
+      %p Open House! Come learn about Ruby from several presenters who use it every day. We'll have a prize drawing
+      %ul
+        %li "Building simple GUI applications with Shoes" - Brian Hogan
+        %li "Addicted to Open Source - Ruby: The Gateway Drug" - Kevin Gisi
+        %li Additional talks
+    %p
+      %span{'class' => "dtstart", 'title'=> "2009-10-01T17:00:00-05:00"} October 1st, 2009 from 5:00 PM
+      %span{'class' => "dtend", 'title'=> "2009-10-01T18:30:00-06:30"} to 6:30 PM
+      %br
+      %span{'class' => "location hcard"}
+        %span{'class' => 'fn org'} at Dooley's Pub,
+        %span{'class' => "street-address"} 442 Water St
+        %span{'class' => "locality"}Eau Claire,
+        %span{'class' => "region"} WI
+  
   %img{'src' => "/images/microformat_hcalendar.png"}
   .vevent
     %h3{'class' => "summary"}
@@ -23,10 +81,6 @@
         %span{'class' => "street-address"} 436 Water St
         %span{'class' => "locality"}Eau Claire,
         %span{'class' => "region"} WI
-
-
-.grid_12
-  %h2 Previous meetings
 
   %img{'src' => "/images/microformat_hcalendar.png"}
   .vevent

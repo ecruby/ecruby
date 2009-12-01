@@ -49,3 +49,18 @@ a {
         float: left;
         font-size: 16px;
         text-decoration: none; }
+
+.promobox {
+  border: 1px solid #660000;
+  background: #664444;
+  padding: 18px;
+  margin-bottom: 18px; }
+
+h2 {
+  font-size: 18px; }
+
+h3 {
+  font-size: 16px; }
+
+h4 {
+  font-size: 14px; }
