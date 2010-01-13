@@ -16,6 +16,7 @@ LOCAL_DIR = "site"
 FILES = ["index.html",
          "jobs.html",
          'open_house.html',
+         'cvrc2010.html',
          'chat.html',
          'contact.html',
          "presentations.html",  
