@@ -1,3 +1,4 @@
 site/*.html
+site/**/*.css
 site/working/*
 .DS_Store
