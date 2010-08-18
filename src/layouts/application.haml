@@ -4,7 +4,7 @@
     %title= "#{@title} | ECRuby - The Chippewa Valley Ruby Users Group (ECRuby)"
     %script{ :src => "http://cdn.jquerytools.org/1.1.2/full/jquery.tools.min.js" }
     %script{ :type => "text/javascript", :src => "/javascripts/flowplayer-3.1.4.min.js" }    
-    = stylesheets "reset", "960", "text", "stickyfooter", "style"
+    = stylesheets "style"
   %body
     #page
       #headerwrap
@@ -17,11 +17,11 @@
         #navbar.grid_12
           = menubar(["Home", "/"], "Meetings", "Presentations", "Resources", "Chat", "Contact", "Jobs", "Getting Started with Ruby", :selected => { :class => 'current', :item => :a })
         .clear
-      #contentwrap
+      #contentwrap.clearfix
         
         #content.container_12
           = yield
-      .clear
+      
     #footerwrap.container_12
       #footer.grid_12
         %p &copy; 2009 ecruby.org

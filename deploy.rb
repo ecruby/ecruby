@@ -54,18 +54,9 @@ FILES.each do |f|
 end
 
 # Upload files in our working directory to the server
-def upload(files)
-  puts "uploading..."
-  Net::SCP.start(REMOTE_HOST, REMOTE_USER, :port => REMOTE_PORT) do |scp|
-   files.each do |file|
-     puts file
-     if File.directory?(file)
-       scp.upload! "working/#{file}",  REMOTE_DIR, :recursive => true
-     else       
-       scp.upload! "working/#{file}",  REMOTE_DIR
-     end
-   end
- end
+def upload
+  "*** UPDATING ***"
+  system("rsync -avz --delete #{WORKING_DIR}/ #{REMOTE_USER}:#{REMOTE_DIR}")
 end
 
 
@@ -82,6 +73,7 @@ def minify(working_dir)
 
     if File.size(newfile) > 0
       FileUtils.cp newfile, file
+      FileUtils.rm newfile
     else
       @errors << "Unable to process #{file}."
     end
@@ -96,7 +88,7 @@ end
 
 if @errors.length == 0
   puts "Deploying"
-  upload(FILES)
+  upload
 else
   puts "Unable to deploy."
   @errors.each{|e| puts e}

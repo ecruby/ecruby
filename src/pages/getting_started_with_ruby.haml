@@ -47,8 +47,13 @@
     %h2 Need a Ruby editor?
     %p 
       We recommend 
-      =link_to "Netbeans Ruby IDE", "/files/netbeans-6.7.1-ml-ruby-windows.exe"
-      (55 MB Windows installer)
+      =link_to "RedCar", "http://redcareditor.com/"
+      which you can install as a RubyGem.
+    %pre
+      :preserve
+        gem install redcar
+        redcar install
+
 .grid_6
   .box
     %h4 Mac OS X
@@ -74,8 +79,8 @@
       to install the necessary libraries
     %pre
       :preserve
-        sudo apt-get install libopenssl-ruby libreadline-ruby1.8 build-essential \
-        ruby ruby1.8-dev irb rake rdoc libsqlite-ruby sqlite3 git-core libxml-ruby \
+        sudo apt-get install build-essential libopenssl-ruby libreadline-ruby1.8 \
+        ruby ruby1.8-dev irb rake rdoc libsqlite3-ruby sqlite3 git-core libxml-ruby \
         libiconv-ruby libxslt-ruby libxslt1-dev libxml2-dev
 
     %p Next, install RubyGems to manage packages
@@ -109,7 +114,7 @@
       = link_to 'Programming Ruby - Free book', 'http://ruby-doc.org/docs/ProgrammingRuby/'
       %p A very detailed guide on Ruby
     %li
-      = link_to "_why's Poignant Guide to Ruby", '/files/whys.pdf'
+      = link_to "_why's Poignant Guide to Ruby", 'http://rubyforge.org/frs/download.php/3845/why.s.poignant.guide.to.ruby-0.5.1-contrib.pdf'
       %p One of the best learning guides ever. Fun to read, with great examples
     %li
       = link_to 'Sinatra', 'http://www.sinatrarb.com/intro.html'
