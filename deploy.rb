@@ -22,7 +22,7 @@ FILES = ["index.html",
          "presentations.html",  
          'getting_started_with_ruby.html',
          "resources.html",
-         "meetings.html",
+         "meetings_and_events.html",
          "stylesheets",
          "images"
         ]
@@ -56,7 +56,7 @@ end
 # Upload files in our working directory to the server
 def upload
   "*** UPDATING ***"
-  system("rsync -avz --delete #{WORKING_DIR}/ #{REMOTE_USER}:#{REMOTE_DIR}")
+  system("rsync -avz #{WORKING_DIR}/ #{REMOTE_USER}:#{REMOTE_DIR}")
 end
 
 

@@ -3,48 +3,48 @@
 @import text.sass
 @import stickyfooter.sass
 
-!measure = 18px
-!text_size = !measure / 1.5
-!body_background = #9b1010
-!header_color = #600
-!tab_color = #644
-!tab_hover_color = #B04444
-!text_color = #fff
+$measure: 18px
+$text_size: $measure / 1.5
+$body_background: #9b1010
+$header_color: #600
+$tab_color: #644
+$tab_hover_color: #B04444
+$text_color: #fff
 
 body
   font:
-    size = !text_size
-  color = !text_color
+    size: $text_size
+  color: $text_color
   background:
-    color = !body_background
+    color: $body_background
     image: url(/images/background.jpg)
     repeat: repeat-y
     position: center
 
 
 p, h2, h3, h4, h5, h6
-  color = !text_color
-  line-height = !measure
-  margin-bottom: !measure
+  color: $text_color
+  line-height: $measure
+  margin-bottom: $measure
 
 
 h1
-  line-height = !measure * 2
+  line-height: $measure * 2
 
 a
-  color = !text_color
+  color: $text_color
 
 #header
   text-align: right
 
 #header, #footerwrap, #navwrap
-  background-color = !header_color
+  background-color: $header_color
 
 #contentwrap
-  padding-top = !measure
+  padding-top: $measure
 
 #navbar, #footer
-  height = !measure * 2
+  height: $measure * 2
 
 #navbar
   ul
@@ -57,36 +57,36 @@ a
       list-style: none
       margin: 0
       display: block
-      background-color = !tab_color
+      background-color: $tab_color
       margin-right: 2px
-      height = !measure * 2
-      line-height = !measure * 2
+      height: $measure * 2
+      line-height: $measure * 2
 
       a
         padding: 0 4px
         display: block
         float: left
-        font-size = !measure - 2
+        font-size: $measure - 2
         text-decoration: none
 
         &:hover, &.current
-          background-color = !tab_hover_color
+          background-color: $tab_hover_color
 
 
 .promobox, .box
   border: 1px solid #600
-  background = !tab_color
-  padding = (!measure / 2) - 1
-  margin-bottom = !measure
+  background: $tab_color
+  padding: ($measure / 2) - 1
+  margin-bottom: $measure
 
 
 h2
-  font-size = !measure
+  font-size: $measure
 
 
 h3
-  font-size = !measure - 2
+  font-size: $measure - 2
 
 
 h4
-  font-size = !measure - 4
+  font-size: $measure - 4

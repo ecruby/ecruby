@@ -57,12 +57,13 @@
 .grid_6
   .box
     %h4 Mac OS X
-    %p Both Leopard and Snow Leopard come with Ruby already installed. However, you may want to update Rubygems. Open a Terminal window and type
+    %p Both Leopard and Snow Leopard come with Ruby already installed. However, you will want to update Rubygems. Open a Terminal window and type
     %pre
       :preserve
         sudo gem update --system
     %p Enter your password when prompted to complete the command.
     %p This updates Rubygems to the latest version if necessary.
+      
     %h2 Need a Ruby editor?
     %p 
       We recommend 
@@ -80,7 +81,7 @@
     %pre
       :preserve
         sudo apt-get install build-essential libopenssl-ruby libreadline-ruby1.8 \
-        ruby ruby1.8-dev irb rake rdoc libsqlite3-ruby sqlite3 git-core libxml-ruby \
+        ruby ruby1.8-dev irb rake rdoc libsqlite3-ruby libsqlite3-dev sqlite3 git-core libxml-ruby \
         libiconv-ruby libxslt-ruby libxslt1-dev libxml2-dev
 
     %p Next, install RubyGems to manage packages
@@ -100,6 +101,20 @@
       We recommend VIm. A 
       =link_to "Rails plugin", "http://rails.vim.tpope.net/"
       is available.
+  .box
+    %h2 Rails
+    %p To install Rails on Windows, open a command prompt and type these commands:
+    %pre
+      :preserve
+        gem install rails
+        gem install sqlite3-ruby
+        
+    %p To install on Linux or Mac OSX, open a terminal and type:
+    %pre
+      :preserve
+        sudo gem install rails
+        sudo gem install sqlite3-ruby
+            
 
 .grid_12
   %h3 Build something
@@ -107,8 +122,8 @@
 
   %ul
     %li
-      = link_to 'Cooking With Ruby On Rails - A Ruby on Rails Crash Course', 'http://dl.dropbox.com/u/50783/rails_cookbook.pdf'
-      %p Learn about the Rails framework and build a simple cookbook web application with this free guide.
+      = link_to 'Cooking With Ruby On Rails - A Ruby on Rails Crash Course', 'http://dl.dropbox.com/u/50783/rails3_cookbook.pdf'
+      %p Learn about the Rails framework and build a simple cookbook web application with this free guide, written for use in our RubyCamp events.
   
     %li
       = link_to 'Programming Ruby - Free book', 'http://ruby-doc.org/docs/ProgrammingRuby/'
