@@ -1,5 +1,6 @@
 # COPYRIGHT: 2007 Brent Beardsley (brentbeardsley@gmail.com)
 # LICENSE: MIT
+require 'date'
 module MenubarHelper
 
   # menubar creates a unordered list of links for your menu

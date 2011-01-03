@@ -2,7 +2,9 @@
   
 .grid_8
   %h1= @title
-
+  %h6 
+    Last updated 
+    =Date.today
 
   %p Ruby is one of the most powerful languages available today, and it's also one of the easiest to learn. This page contains everything you need to know to get started working with Ruby today.
   %h3 Giving Ruby a Spin
@@ -14,12 +16,15 @@
 .grid_4
   %h3 Quick links
   %ul
-    %li= link_to "Try Ruby (In Your Browser!)", "http://tryruby.sophrinix.com/"
+    %li= link_to "Try Ruby (In Your Browser!)", "http://tryruby.org/"
     %li= link_to "RubyInstaller for Windows", 'http://www.rubyinstaller.org'
-    %li= link_to "Download Ruby", 'http://www.ruby-lang.org/en/downloads/'
+    %li= link_to 'Cooking With Ruby On Rails - A Ruby on Rails Crash Course', 'http://dl.dropbox.com/u/50783/rails3_cookbook.pdf'
+    %li= link_to 'Rails Mentors', 'http://railsmentors.org'
+    %li= link_to 'Rails Tutorial', 'http://railstutorial.org/'
+    %li= link_to 'Ruby Version Manager', 'http://rvm.beginrescueend.com/'
     %li= link_to 'Ruby on Rails Wiki', 'http://wiki.rubyonrails.org'
     %li= link_to 'Programming Ruby - Free book', 'http://www.rubycentral.com/book/'
-    %li= link_to "_why's Poignant Guide to Ruby", 'http://why.kevingisi.com/whys-poignant-guide-to-ruby.pdf'
+    %li= link_to "_why's Poignant Guide to Ruby", 'http://rubyforge.org/frs/download.php/3845/why.s.poignant.guide.to.ruby-0.5.1-contrib.pdf'
     %li= link_to 'Sinatra', 'http://www.sinatrarb.com/intro.html'
     %li= link_to "StaticMatic", 'http://staticmatic.rubyforge.org/'
     
@@ -124,10 +129,12 @@
     %li
       = link_to 'Cooking With Ruby On Rails - A Ruby on Rails Crash Course', 'http://dl.dropbox.com/u/50783/rails3_cookbook.pdf'
       %p Learn about the Rails framework and build a simple cookbook web application with this free guide, written for use in our RubyCamp events.
-  
+    %li
+      = link_to 'Rails Tutorial', 'http://railstutorial.org/'
+      %p This deep-dive tutorial teaches you how to build a Rails app, with tests, and learn about other concepts like Git and deployment. 
     %li
       = link_to 'Programming Ruby - Free book', 'http://ruby-doc.org/docs/ProgrammingRuby/'
-      %p A very detailed guide on Ruby
+      %p A very detailed guide on Ruby, and while it only covers version 1.6 of Ruby, a lot of the concepts and examples are still excellent.
     %li
       = link_to "_why's Poignant Guide to Ruby", 'http://rubyforge.org/frs/download.php/3845/why.s.poignant.guide.to.ruby-0.5.1-contrib.pdf'
       %p One of the best learning guides ever. Fun to read, with great examples
