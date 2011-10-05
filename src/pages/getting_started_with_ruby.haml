@@ -34,21 +34,27 @@
   %p 
     Ruby is relatively easy to install on nearly every platform. However, we recommend installing
     %strong
-      Ruby 1.8.7
-    at the moment, as many libraries you may want to try are not yet compatible with Ruby 1.9.
- 
+      Ruby 1.9.2
+    at the moment.
+     
 .grid_6
   .box
     %h4 Windows
     %p 
       Windows users can grab the 
-      =link_to "RubyInstaller For Windows", "http://rubyforge.org/frs/download.php/66871/rubyinstaller-1.8.6-p383-rc1.exe"
+      =link_to "RubyInstaller For Windows", "http://rubyinstaller.org/downloads/"
       which will install Ruby and the Rubygems package manager.
     %p Once installed, open a Command Prompt and type
     %pre
       :preserve
         gem update --system
     %p This updates Rubygems to the latest version if necessary.
+    
+    %p 
+      Next, follow 
+      = link_to "these instructions", "http://rubyinstaller.org/add-ons/devkit/"
+      to install additional components for Ruby libraries that need to be compiled.
+      
     %h2 Need a Ruby editor?
     %p 
       We recommend 
@@ -62,13 +68,28 @@
 .grid_6
   .box
     %h4 Mac OS X
-    %p Both Leopard and Snow Leopard come with Ruby already installed. However, you will want to update Rubygems. Open a Terminal window and type
+    %p
+      Both Leopard and Snow Leopard come with Ruby already installed,
+      You'll be happier if you use RVM, the Ruby Version Manager.
+      To do this, you'll need the GCC compilers. Install XCode from your
+      OSX DVD, or grab prebuilt compilers from
+      =link_to "here", "https://github.com/kennethreitz/osx-gcc-installer/downloads"
+    %p
+      Next, install Git using the
+      = link_to "Git OSX Installer", "http://code.google.com/p/git-osx-installer/downloads/list?can=3"
+    %p
+      Finally, open a Terminal and type these commands:
     %pre
       :preserve
-        sudo gem update --system
-    %p Enter your password when prompted to complete the command.
-    %p This updates Rubygems to the latest version if necessary.
-      
+        bash < <( curl -s https://rvm.beginrescueend.com/install/rvm )
+        echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" ' >> ~/.bash_profile
+    
+    %p Now close and restart Terminal. Then type
+    %pre
+      :preserve
+        rvm install 1.9.2
+        rvm --default 1.9.2
+              
     %h2 Need a Ruby editor?
     %p 
       We recommend 
@@ -81,13 +102,28 @@
     %p 
       Use
       %strong
-        apt
-      to install the necessary libraries
+        rvm
+      the Ruby Version Manager, to get everything running. Type these commands from a new Terminal:
     %pre
       :preserve
-        sudo apt-get install build-essential libopenssl-ruby libreadline-ruby1.8 \
-        ruby ruby1.8-dev irb rake rdoc libsqlite3-ruby libsqlite3-dev sqlite3 git-core libxml-ruby \
-        libiconv-ruby libxslt-ruby libxslt1-dev libxml2-dev
+        sudo apt-get install build-essential git-core curl
+        
+        bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+        
+        echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"' >> ~/.bashrc 
+        
+        sudo apt-get install build-essential bison openssl libreadline6 \
+        libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev \
+        libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev \
+        libxslt-dev autoconf
+    
+    %p Now close and restart your Terminal, and type:
+    %pre
+      :preserve
+        rvm install 1.9.2
+        
+        rvm --default use 1.9.2
+        
 
     %p Next, install RubyGems to manage packages
     %pre
@@ -103,23 +139,20 @@
    
     %h2 Need a Ruby editor?
     %p 
-      We recommend VIm. A 
+      We recommend Vim. A 
       =link_to "Rails plugin", "http://rails.vim.tpope.net/"
       is available.
   .box
     %h2 Rails
-    %p To install Rails on Windows, open a command prompt and type these commands:
-    %pre
-      :preserve
-        gem install rails
-        gem install sqlite3-ruby
+    %p 
+      To install Rails on Windows, simply download the
+      =link_to "RailsInstaller for Windows", "http://railsinstaller.com"
+      to get Ruby, Rails, and everything else installed.
         
     %p To install on Linux or Mac OSX, open a terminal and type:
     %pre
       :preserve
-        sudo gem install rails
-        sudo gem install sqlite3-ruby
-            
+        gem install rails 
 
 .grid_12
   %h3 Build something
