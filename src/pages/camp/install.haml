@@ -1,0 +1,119 @@
+- @title = "Installing Rails, Ruby, and Other Dependencies"
+.sixteen.columns
+  %h1= @title
+  :markdown
+    Windows
+    =========
+
+    Download the RailsInstaller from [here](http://ecruby.org/files/rubycamp/windows/railsinstaller-2.0.1.exe)
+
+    Install this on your machine. This installs Ruby, Rails 3.1, OpenSSH, and a few other libraries we'll need.
+
+    When a Console window comes up asking you for your name and email, enter them and follow the directions on the screen. This creates public and private keys that you'll need to deploy an application to production later.
+
+    ### Install a JRE
+    You may need to have a Java runtime on your machine. Most people already have one installed, but just to be safe, install [this](http://ecruby.org/files/rubycamp/windows/jre-6u21-windows-i586-s.exe)
+
+
+    ### Install SublimeText
+    We'll use SublimeText 2 for this workshop. Grab it from [here](http://ecruby.org/files/rubycamp/windows/Sublime%20Text%202%20Build%202165%20Setup.exe) and install it.
+
+    That was simple enough, now go down to the [Configuring your environment](#configuring_your_environment) section below.
+
+    OSX
+    =========
+
+    Snow Leopard users:
+    Download and install [this](http://ecruby.org/files/rubycamp/mac/10.6/GCC-10.6.pkg)
+
+    Lion users 
+    download and install [this]( http://ecruby.org/files/rubycamp/mac/10.7/GCC-10.7-v2.pkg)
+
+    Then open Terminal (if you don't know where this is, you'll want to use Spotlight to find it)
+
+    Command-click Terminal in your dock and pin it to the dock so it's always there. We'll use it a lot today.
+
+    In Terminal, type
+
+        export
+    
+    If you get "command not found" or similar, you'll need to change your default shell to Bash by going to Preferences, Users and Groups, unlocking the preferences pane, Command-clicking your username, choosing Advanced Options, and changing your default shell. You'll then need to close Terminal and relaunch it.
+
+    If `export` gives you a long list of text, you can proceed.
+
+    ## Installing Homebrew
+
+    At the Terminal, type
+
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+
+    Now install Git
+
+        brew install git
+    
+    Finally, install a recent version of SQLite3
+
+        brew install sqlite3
+    
+    ## Installing RVM and Ruby
+
+    In the Terminal, type:
+
+        bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+    
+    Then
+
+        source ~/.bash_profile
+    
+    Then install Ruby
+
+        rvm install 1.9.2
+    
+    Then make it default
+
+        rvm --default use 1.9.2
+    
+    Finally, install Rails 3.1
+
+        gem install rails -v=3.1
+    
+
+    We'll use SublimeText 2 for this workshop. Grab it from  [here](http://ecruby.org/files/rubycamp/mac/Sublime%20Text%202%20Build%202165.dmg) and install it by opening the DMG file and dragging it to your Applications folder.
+
+    Once done, continue with the rest of the steps.
+
+
+    Configuring your environment
+    =========
+
+    Create an account at heroku.com. Remember your username and password
+
+    Windows users: Open "Command Prompt with Ruby on Rails"
+    Mac users: Open Terminal.
+
+    We'll refer to these both as "the shell".
+
+    In the shell, type
+
+        gem install sinatra sinatra-reloader pony heroku
+
+    Next, type
+
+        heroku list
+   
+    You'll be prompted for your Heroku credentials and your keys should be uploaded.
+
+    Finally, see if Rails works. At the shell, type
+
+        rails new test
+
+    This creates a new Rails application in a folder called `test`
+
+    Type
+
+        cd test
+        rails g scaffold item name:string
+        rake db:migrate
+        rails server
+    
+    and visit [http://localhost:3000/items](http://localhost:3000/items) If you see a web interface, everything's ready to go.

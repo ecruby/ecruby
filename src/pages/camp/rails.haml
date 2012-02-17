@@ -1,0 +1,418 @@
+- @title = "Mobile Apps with Rails"
+.sixteen.columns
+  %h1= @title
+  :markdown
+
+    ## Workshop 1
+
+    Creating the basic app
+
+        rails new shoppinglist
+        cd shoppinglist
+
+    Creating our first controller is as easy as using the generator. Specify the generator `controller` and then the name of the controller, followed by the names of the pages you want, separated by spaces.
+
+        rails g controller pages index about
+
+    This generates the controller and two view pages.
+
+    Now open `app/views/pages/index.html.erb` and change the content to this:
+
+        <h2>Welcome</h2>
+
+    Then change `app/views/pages/about.html.erb` to
+
+        <h2>About ShoppingList</h2>
+        <p>
+          This app will let us create a shopping list
+          so we can keep track of our groceries and 
+          access our list on our phones.
+        </p>
+
+    We can define the layout in `app/views/layouts/application.html.erb`
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>Shoppinglist</title>
+          <%= stylesheet_link_tag    "application", :media => "all" %>
+          <%= javascript_include_tag "application" %>
+          <%= csrf_meta_tags %>
+        </head>
+        <body>
+          <div id="container">
+            <header>
+              <h1>ShoppingList</h1>
+            </header>
+      
+            <nav>
+              <ul>
+                <li><%= link_to "Home", :controller => "pages", :action => "index" %></li>
+                <li><%= link_to "About", :controller => "pages", :action => "about" %></li>
+              </ul>
+            </nav>
+      
+            <section id="main">
+              <%= yield %>
+            </section>
+      
+            <footer>
+              <h5>Copyright 2012 ShoppingList</h5>
+            </footer>
+          </div>
+        </body>
+        </html>
+
+    Now let's add some basic CSS in application.css
+
+        #container{
+          width:900px;
+          margin:0px auto;
+        }
+
+        nav{
+          display: block;
+          width: 100%;
+          margin: auto;
+          height: 40px;
+  
+        }
+        nav ul{
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+        nav ul li{
+          float: left;
+        }
+
+        nav a{
+          padding-right: 10px;
+          display: block;
+          line-height: 40px;
+        }
+
+    
+    Now, locate these routes in `config/routes.rb` and remove them:
+
+        get "pages/index"
+        get "pages/about"
+
+    Replace with this:
+
+        match "/about", :to => "pages#about"
+        root :to => "pages#index"
+
+    These create helper methods. So we can change our view and eliminate the messy
+  
+        :controller => "pages", :action => "home"
+    
+    Clean up the navbar in `app/views/layouts/application.html.erb` by using the helpers root_path and about_path:
+
+        <ul>
+          <li><%= link_to "Home", :controller => "pages", :action => "index" %></li>
+          <li><%= link_to "About", :controller => "pages", :action => "about" %></li>
+        </ul>
+
+    to
+
+        <ul>
+          <li><%= link_to "Home", root_path %></li>
+          <li><%= link_to "About", about_path %></li>
+        </ul>
+
+    ## Workshop 2: Lists with Scaffolding
+
+    Create the list interface with
+
+        rails g scaffold lists name:string
+        rake db:migrate
+    
+    This creates the whole thing. It creates forms for creating the lists,
+    pages for showing a list and even controls for deleting lists.
+
+    Open `app/views/lists/show.html.erb and` cut this line: 
+
+        <p id="notice"><%= notice %></p>
+    
+    And in the `application.html.erb` page, put it in below the navbar:
+
+        <div id="notice"><%= notice %></div>
+    
+    This way it gets shared. We'll need it when we create items.
+
+    While there, add the lists to the navbar. The generator added routes to
+    the `config/routes.rb` file which also gives us handy helper methods. Add this to the navbar:
+
+        <li><%= link_to "Lists", lists_path %></li>
+
+    We can create lists without titles. We need to fix that. Open `app/models/list.rb` and add a validation rule
+
+        class List < ActiveRecord::Base
+          validates_presence_of :name
+        end
+
+    ## Workshop 3: Adding Items
+
+    Now we can create a second table for the list's items. We'll need a controller though. We could use the scaffold, but we'll need to make substantial changes
+    to that scaffold. Instead, we'll create a resource and then write the logic
+    to create the items ourselves.
+
+        rails g resource item name:string done:boolean list:references
+        rake db:migrate
+    
+    We want to nest items under lists so we get `lists/1/items`. To do that
+    we edit `config/routes.rb`
+
+    Change
+
+        resources :items
+        resources :lists
+    
+    to
+
+        resources :lists do
+          resources :items
+        end
+
+    Now change the `lists/index.html.erb` page so that the link for the list doesn't go to the `list` show page, but rather the list of items for the list.
+
+    Change this:
+
+        <td><%= link_to 'Show', list %></td>
+
+
+    to this:
+
+        <td><%= link_to 'Show', list_items_path(list) %></td>
+    
+    Visit `http://localhost:3000/lists`, create a new list, then go to the list page and click the Show link. You'll get an error that there's no action. We'll have to write one.
+
+    First, we have to tell Rails that a List has many items. We do that with an
+    association.
+
+        class List < ActiveRecord::Base
+          validates_presence_of :name 
+          has_many :items
+        end
+
+    Now we can write a controller action that grabs the list in the URL, which
+    is available via params[:list_id]. We can look up the record and then 
+    get its items.
+
+        def index
+          @list = List.find params[:list_id]
+          @items = @list.items
+        end
+
+    Then we add a items.html.erb page to display the items:
+
+        <h2><%=@list.name %></h2>
+        <hr>
+        <% if @items.empty? %>
+          <p>You don't have any items.</p>
+        <% end %>
+
+        <p><%= link_to "Add item", new_list_item_path(@list) %></p>
+
+        <ul id="items">
+          <% @items.each do |item| %>
+            <li><%= item.name %></li>
+          <% end %>
+        </ul>
+    
+    
+    To add an item, we need to add a simple form in new.html.erb
+
+        <h2>New item for <%=@list.name %></h2>
+
+        <%= form_for [@list, @item] do |f| %>
+          <%=f.label :name %>
+          <%=f.text_field :name %>
+          <%=f.submit %>
+        <% end %>
+    
+    
+    To make this work, we need to add a controller action
+    to fetch the list and create a new @item object the form
+    can use.
+
+        def new
+          @list = List.find params[:list_id]
+          @item = Item.new
+          @item.list = @list
+        end
+    
+    When we go to the list of items and click New Item, we can
+    now fill in the form. But when we try to create, we
+    get an error. We need to write the code to save the
+    item to the database.
+
+    In items_controller, we add a "create" action:
+
+        def create
+           @list = List.find params[:list_id]
+           @item = Item.new(params[:item])
+           @item.list = @list
+           if @item.save
+             redirect_to list_items_path(@item), :notice => "Item added"
+           else
+             render :action => :new
+           end
+        end
+    
+    How would an item not save? If we forgot to put in a name. Let's use validations to require that:
+
+        class Item < ActiveRecord::Base
+          belongs_to :list
+          validates_presence_of :name
+        end
+    
+    ## Workshop 4: Updates
+
+    First add the action to the controller:
+  
+        def update
+          @list = List.find params[:list_id]
+          @item = @list.items.find params[:id]
+          @item.update_attributes params[:item]
+          respond_to do |format|
+            format.json do
+              render :json => @item
+            end
+          end
+        end
+    
+    Next, change the list of items to a form with checkboxes.
+
+        <ul>
+          <% @items.each do |item| %>
+            <li>
+              <%=form_for [@list, item], :remote => true do |f| %>
+                <%=f.check_box :done %>
+                <%=f.label :done, item.name %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+
+    This creates a remote form. But we don't have a submit button. We need
+    to trigger the submit
+
+    Finally, add in some javascript
+
+        $ ->
+          $('input').on 'click', ->
+            $(this).closest('form').submit()
+        
+    or in JavaScript
+
+        $(function() {
+          $('input').on('click', function() {
+            $(this).closest('form').submit();
+          });
+        });
+
+    Then use the callback to change the status message
+
+        $ ->
+          $('input').on 'click', ->
+            $(this).closest('form').on 'ajax:success', (e, data) ->
+              $("#notice").html("Updated " + data.name )
+            $(this).closest('form').submit()
+
+    or in JavaScript
+
+        $(function() {
+          $('input').on('click', function() {
+            $(this).parent('form').on('ajax:success', function(e, data) {
+              $("#notice").html("Updated " + data.name);
+            });
+            $(this).parent('form').submit();
+          });
+        });
+    
+    
+    ## Workshop 5: Going Mobile
+
+    Add a mobile mime-type to `config/initializers/mime_types.rb` so we can handle mobile requests
+
+        Mime::Type.register_alias "text/html", :mobile
+
+    Then add a new index page under `app/views/lists/index.mobile.erb` with
+
+        <h1>Hi from mobile</h1>
+
+    When you visit http://localhost:3000/lists.mobile you'll get the new mobile view.
+
+    Let's make a mobile layout using jQuery Mobile. Create a new layout file called `app/views/layouts/application.mobile.erb` with this code:
+
+        <!DOCTYPE html> 
+        <html class="ui-mobile-rendering"> 
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+          <title>Shopping List</title>
+          <link rel="stylesheet" 
+                href="http://code.jquery.com/mobile/1.0rc2/jquery.mobile-1.0rc2.min.css" />
+
+          <%= javascript_include_tag "application" %>
+          <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+          <%= csrf_meta_tag %>
+
+          <body>
+            <div data-role="page">
+              <%= yield %>
+            </div>
+          </body>
+
+        </html>
+
+    
+    Now add a new view for lists in `app/views/lists/index.mobile.erb` with this code:
+
+        <div data-role="header">
+          <h1>My Lists</h1>
+        </div>
+
+        <div data-role="content">
+          <ul data-role="listview">
+            <% @lists.each do |list| %>
+            <li>
+              <%= link_to list.name, list_items_path(list, :format => :mobile) %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+    
+    Now create a similar file to list the items of the list in `app/views/items.mobile.erb` with this content:
+
+        <div data-role="header">
+         <h1><%= @list.name %></h1>
+        </div>
+
+        <div data-role="content">
+         <ul id="mobile_items" data-role="listview">
+           <% @items.each do |item| %>
+           <li>
+             <%=form_for [@list, item], :format => "json", :remote => true do |f| %>
+               <%=f.check_box :done %>
+               <%=f.label :done, item.name %>
+             <% end %>
+           </li>
+           <% end %>
+         </ul>
+        </div>
+   
+    To make the links work properly, we have to add more JS. We can't rely on Rails' forms to do this for us. Add this to `app/assets/items.coffee` and be sure it's indented evenly with the previous code, so that it's nested within the scope of the `$ ->` 
+
+        $('#mobile_items input').on 'click', ->
+          form = $(this).closest('form')
+          $.ajax
+            url: form.attr("action")
+            dataType: "json"
+            type: "PUT"
+            data: form.serialize()
+    
+    Now visit http://localhost:3000/lists.mobile and you should be able to use the app!

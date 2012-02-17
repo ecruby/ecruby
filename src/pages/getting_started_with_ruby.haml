@@ -1,6 +1,6 @@
 -@title = "Getting Started with Ruby"
   
-.grid_8
+.ten.columns
   %h1= @title
   %h6 
     Last updated 
@@ -13,10 +13,12 @@
     =link_to "Try Ruby (In Your Browser!)", "http://tryruby.sophrinix.com/"
     and follow along with the interactive tutorial to see how easy Ruby's syntax is.
   
-.grid_4
+.six.columns
   %h3 Quick links
   %ul
     %li= link_to "Try Ruby (In Your Browser!)", "http://tryruby.org/"
+    %li= link_to "RailsInstaller for Windows", 'http://www.railsinstaller.org'
+    
     %li= link_to "RubyInstaller for Windows", 'http://www.rubyinstaller.org'
     %li= link_to 'Cooking With Ruby On Rails - A Ruby on Rails Crash Course', 'http://dl.dropbox.com/u/50783/rails3_cookbook.pdf'
     %li= link_to 'Rails Mentors', 'http://railsmentors.org'
@@ -28,8 +30,7 @@
     %li= link_to 'Sinatra', 'http://www.sinatrarb.com/intro.html'
     %li= link_to "StaticMatic", 'http://staticmatic.rubyforge.org/'
     
-.clear
-.grid_12
+.sixteen.columns
   %h3 Getting Ruby set up on your machine
   %p 
     Ruby is relatively easy to install on nearly every platform. However, we recommend installing
@@ -37,9 +38,9 @@
       Ruby 1.9.2
     at the moment.
      
-.grid_6
+.sixteen.columns
   .box
-    %h4 Windows
+    %h2 Windows
     %p 
       Windows users can grab the 
       =link_to "RubyInstaller For Windows", "http://rubyinstaller.org/downloads/"
@@ -55,7 +56,7 @@
       = link_to "these instructions", "http://rubyinstaller.org/add-ons/devkit/"
       to install additional components for Ruby libraries that need to be compiled.
       
-    %h2 Need a Ruby editor?
+    %h4 Need a Ruby editor?
     %p 
       We recommend 
       =link_to "RedCar", "http://redcareditor.com/"
@@ -65,9 +66,10 @@
         gem install redcar
         redcar install
 
-.grid_6
+    %p And that's all you need.
+.sixteen.columns
   .box
-    %h4 Mac OS X
+    %h2 Mac OS X
     %p
       Both Leopard and Snow Leopard come with Ruby already installed,
       You'll be happier if you use RVM, the Ruby Version Manager.
@@ -81,24 +83,23 @@
       Finally, open a Terminal and type these commands:
     %pre
       :preserve
-        bash < <( curl -s https://rvm.beginrescueend.com/install/rvm )
-        echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" ' >> ~/.bash_profile
-    
+        bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
+        
     %p Now close and restart Terminal. Then type
     %pre
       :preserve
         rvm install 1.9.2
         rvm --default 1.9.2
               
-    %h2 Need a Ruby editor?
+    %h4 Need a Ruby editor?
     %p 
       We recommend 
       =link_to "Textmate", "http://download-b.macromates.com/TextMate_1.5.9.dmg"
       (30 day trial, OS X DMG)
-.clear
-.grid_12
+
+.sixteen.columns
   .box
-    %h4 Linux (Ubuntu)
+    %h2 Linux (Ubuntu)
     %p 
       Use
       %strong
@@ -137,7 +138,7 @@
         sudo ln -s /usr/bin/gem1.8 /usr/bin/gem
         sudo gem update --system
    
-    %h2 Need a Ruby editor?
+    %h4 Need a Ruby editor?
     %p 
       We recommend Vim. A 
       =link_to "Rails plugin", "http://rails.vim.tpope.net/"
@@ -154,8 +155,8 @@
       :preserve
         gem install rails 
 
-.grid_12
-  %h3 Build something
+.sixteen.columns
+  %h2 Build something
   %p Now that you have Ruby installed, try building something fun.
 
   %ul

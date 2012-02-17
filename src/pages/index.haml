@@ -1,14 +1,15 @@
 - @title = "Welcome"
 
-.grid_8
+.ten.columns
 
   .promobox
-    %h3 Devember ECRuby Meeting
-    %p  Thursday 12/1/2011 at Dooley's Pub from 5-7PM
-    %p 
-      Register 
-      %a{:href=>"http://events.ecruby.org/events/28"} here.
-
+    #meeting
+      %h3 Latest ECRuby Meeting
+      %p 
+        Click 
+        %a{:href=>"http://events.ecruby.org/events/latest"} here.
+        to learn about our upcoming meeting.
+        
   %h2 ECRuby - Bringing Ruby to Everyone
 
   %p Join us on the first Thursday of every month for food, company, and conversation about the  latest topics in the Ruby world, as well as interesting technical presentations on relevant topics.
@@ -16,6 +17,18 @@
   %p Our goal is to promote open-source development and education by using one of the most powerful dynamic languages available.
  
  
+  %h4 Get Involved!
+
+  %ul
+    %li
+      Stay in touch by joining our 
+      = link_to "Google Group", "http://groups.google.com/group/ecruby/"
+    %li
+      We do some open-source stuff at Hack Night. See our 
+      = link_to "Source code at GitHub", "http://www.github.com/ecruby"
+    %li
+      Of course, come join our monthly meetings, or even speak at one!
+
 
   
   %h3 What is Ruby?
@@ -26,23 +39,16 @@
     at the official Ruby Language website.
 
 
-.grid_4.omega
+.six.columns
   %img{:src => "/images/ruby.png", :alt=>"Ruby"}
 
   %h4 ECRuby on Twitter
   %ul#twitter_update_list
     %li= link_to "Twitter", "http://www.twitter.com/ecruby"
   
-  %h4 ECRuby Elsewhere
-  
-  %ul
-    %li= link_to "Google Group", "http://groups.google.com/group/ecruby/"
-    %li= link_to "Source code at GitHub", "http://www.github.com/ecruby"
 
 
-
-.grid_11
-  #twitter_div
+#twitter_div
 
 
 %script{ :type => "text/javascript", :src => "http://twitter.com/javascripts/blogger.js" }

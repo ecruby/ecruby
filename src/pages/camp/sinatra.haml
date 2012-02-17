@@ -1,0 +1,344 @@
+- @title = "Sinatra"
+.sixteen.columns
+  %h1= @title
+  :markdown
+
+    Hello World
+    ===========
+    To create our application we first will create a new folder and inside create a new file named app.rb
+
+    Inside app.rb copy this:
+
+        require 'sinatra'
+
+    Jump into your command prompt and change directory so you are in your new folder and type
+
+        ruby app.rb
+
+    This will start our server and will run our application at http://localhost:4567 
+    when you visit that page you should get splash that says "Sinatra doesn't know this ditty!" 
+
+    The splash page gave us a suggestion to add to our application. So lets go back into app.rb and add that. While we are in there, lets call the sinatra_reloader gem so we don't need to restart our server every time
+
+        require "sinatra" 
+        require "sinatra/reloader"
+
+        get "/" do 
+          "Hello World!" 
+        end 
+
+    Restart your server (at command line ctr-c then ruby app.rb)
+
+    Reload the page in the browser and you should see "Hello World!"
+
+
+    ###Routes
+    Sintra uses routes to help us control the flow of our application. Inside app.rb put the following at the end of the file.
+
+        get "/name" do
+          name = "Barney"
+          "Hello, my name is \#{name}"
+        end
+
+    Sinatra also uses POST, PUT, DELETE for the blocks
+
+    ###Parameters
+    Sinatra gives us the ability to pull data in from a URL. To that, we tell our application what we expect the URL to be and what we want to call our data. Change the last block in app.rb to look like this:
+	
+        get "/name/:name" do
+          name = params[:name]
+          "Hello, my name is \#{name}"
+        end
+
+    Now visit http://localhost.com:4567/name/steve .
+    But what happens when we visit http://localhost.com:4567/name  ? We get an error page because we told our application that we expect a name to be given. What if we want the name to be optional? Simple enough. just modify the lock to look like this:
+
+        get "/name/?:name?" do
+          name = params[:name]
+          "Hello, my name is \#{name}"
+        end
+
+    Now reload the page and you should not get an error.
+
+    Creating a layout and moving content to erb
+    ===========================================
+    As you have seen, all we are getting is just plan text back, but if we return a string of HTML, that is what will get rendered. Change app.rb to look like this:
+
+        get "/name/?:name?" do
+          name = params[:name]
+          "<h1>Hello, my name is \#{name}</h1>"
+        end
+
+    Reload the page and you will see the out put as an H1
+
+    ###The Structure
+
+    Create a new directory in the your project root calls views.
+    Inside the views folder, create a new file called home.erb. Fill out the erb file so it looks like this:
+
+        <html>
+          <head>
+            <title>Barney Stinson</title>
+          </head>
+          <body>
+            <h1>My name is Barney Stinson<h1>
+          </body>
+        </html>
+
+    Now back in our app.rb file. Change the root clock to look like this:
+
+        get "/" do
+          erb :home
+        end
+
+    ####Passing data to view
+
+    We have the route calling our view, but how do pass information to it?
+
+    Lets try:
+
+        get "/" do
+    	  message = "Welcome to my site"
+          erb :home
+        end
+
+    and in views/home.erb
+
+        <html>
+          <head>
+            <title>Barney Stinson</title>
+          </head>
+          <body>
+            <h1>My name is Barney Stinson<h1>
+    		<p><%= message %></p>
+          </body>
+        </html>
+
+    and we get an error. That is because we are trying to pass a local variable to our view and the message variable goes out of scope.
+
+    update both of the files to this:
+
+        get "/" do
+    	  @message = "Welcome to my site"
+          erb :home
+        end
+
+    (views/home.erb)
+    
+        <html>
+          <head>
+            <title>Barney Stinson</title>
+          </head>
+          <body>
+            <h1>My name is Barney Stinson<h1>
+    		<p><%= @message %></p>
+          </body>
+        </html>
+    Now we are using an instance variable that does have scope within the view.
+
+    #### ERB Tags
+    What is with th <%= %>
+    That is erb's way of saying. This is ruby code, evaluate it.
+
+    #### Using a layout
+    It would be very tedious to have to out put the entire HTML file contents for every page. Lucky, we don't have to. Sintra allows us to use a layout file that will get used for every page and inside the layout we can say where we want the specific page content. By default, this file needs to be in the views directory and be called layout. Create a file in views and call it layout.erb. Inside it, fill in the following content:
+
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Barney Stinson</title>
+          </head>
+          <body>
+            <%= yield %>
+            <footer>
+              Copyright <%= Time.now.year %> The Barnicle
+            </footer>
+          </body>
+        </html>
+
+    The <%= yield %> is where our content would go. No go into home.erb and modify it to get rid of everything except the following.
+
+        <h1>My name is Barney Stinson<h1>
+    	  <p><%= @message %></p>
+
+    Reload re-load the page in your browser and it should still look the same except we broke the files into more managable pieces. 
+
+    ###Stylesheets
+    We have our content, but we it looks pretty bare. Lets attach a stylesheet. Sinatra looks for you public assets ie. stylesheets, JS, images all in a folder in the root of your project named public. Let's create that folder and then inside of it create a folder called stylesheets. Inside the stylesheets folder create a new file named application.css and put some basic styles. You can use these: or create your own.
+
+        html {
+          background: #D6D6D6;
+        }
+        footer {
+          font-size: 14px;
+          color: #fff;
+          text-shadow: 1px 1px 1px #000;
+        }
+
+    Now we need to hook up our layout file to read this. Modify the head of layout.erb to look like this:
+
+    	<head>
+            <title>Barney Stinson</title>
+            <link rel="stylesheet" type="text/css" href="stylesheets/application.css" />
+          </head>
+
+    Reload you page and you should see your new styles.
+
+    Creating a contact form
+    =======================
+    Now its time to add a contact form. To start off, we create our sinatra block in app.rb.
+
+        get "/contact" do
+          erb :contact
+        end
+
+    Next we need to create the form as views/contact.erb
+
+        <div id="contact_form">
+          <h1>Contact me</h1>
+          <form action="/contact" method="post">
+            <label for="message_email">Email</label>
+            <input id="message_email" type="email" size="30" name="message[email]">
+            <br />
+            <label for="message_subject">Subject</label>
+            <input id="message_subject" type="text" size="30" name="message[subject]">
+            <br />
+            <label for="message_content">Message</label>
+            <br>
+            <textarea id="message_content" rows="15" name="message[content]" cols="50"></textarea>
+            <br>
+            <input type="submit" value="Send" name="commit">
+        
+          </form>
+        </div>
+
+    Taking a look at that more in depth
+
+    Form action
+
+        <form action="/contact" method="post">
+    Inputs
+
+        <input id="message_email" type="email" size="30" name="message[email]">
+
+        <input id="message_subject" type="text" size="30" name="message[subject]">
+
+        <textarea id="message_content" rows="15" name="message[content]" cols="50"></textarea>
+
+    #####Connecting up the ability to send mail
+
+    Install Pony Gem
+
+    first we need a something to help us send the email. To do that install the pony ge
+
+        gem install pony
+        
+    After installing it, we need to add it to our app.rb
+
+    Add to app.rb
+
+        require 'sinatra'
+        require 'sinatra/reloader'
+        require 'pony'
+
+        get "/" do
+          erb :home
+        end
+
+        get "/name/?:name?" do
+          name = params[:name]
+          "<h1>Hello, my name is \#{name}</h1>"
+        end
+
+        get "/contact" do
+          erb :contact
+        end
+
+    ####Adding POST routes
+
+    Now we need to actually handle the email in app.rb. Start by adding this route block to app.rb
+
+
+        post '/contact' do
+          redirect "/"
+        end
+
+    Now visit http://localhost:4567/contact and fill out the form and submit it. You then should be back on home page. Now that didn't actually send the mail, but it show the form is pointing to the right route and it is working.
+
+    The next step will be to use Pony to actually send the mail. Modify the block to look like this
+
+        post '/contact' do
+
+          Pony.mail(:to => 'your-email-address',
+                    :from => params[:message][:email],
+                    :subject => params[:message][:subject],
+                    :body => params[:message][:content],
+                    :via => :smtp,
+                    :smtp => {
+                      :host => "your host", #ex "smtp.gmail.com"
+                      :port => 'port-number', #ex 587
+                      :user => 'your-login-credentials',
+                      :password => 'your-pasword',
+                      :auth => :plain,
+                      :domain => "Your domain"
+                    })
+
+          redirect "/"
+        end
+
+    Thats a big chuck of code, but lets break it down
+
+    Smtp params - This is the connection to your mail account so Pony knows where to send from. 
+
+        :smtp => {
+          :host => "your host", #ex "smtp.gmail.com"
+          :port => 'port-number', #ex 587
+          :user => 'your-login-credentials',
+          :password => 'your-pasword',
+          :auth => :plain,
+          :domain => "Your domain"
+        }
+
+    Pony params - these are the parameters from our form that we sent notice how everything is nicely nested in the params[:message] has because thats how we named it.
+
+        :to => 'your-email-address',
+               :from => params[:message][:email],
+               :subject => params[:message][:subject],
+               :body => params[:message][:content],
+               :via => :smtp,
+
+    With that in place, you can go ahead and fillout the form and it will send the email. 
+
+    Linking Our Form in the Layout
+    ==============================
+    On final step left. We need to actually link it up to out layout so people can find it. Modify layout.erb to look like this:
+
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>Barney Stinson</title>
+            <link rel="stylesheet" type="text/css" href="stylesheets/application.css" />
+          </head>
+          <body>
+            <header>
+              <h1>Barney Stinson - Legendary</h1>
+              <nav>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/contact">Contact</a></li>
+                </ul>
+              </nav>
+            </header>
+            <div id="content"> 
+              <%= yield %>
+          </div>
+            <footer>
+              Copyright <%= Time.now.year %> Barney Stinson
+            </footer>
+          </body>
+        </html>
+ 
+    Now we should have a nav bar that lets us go between the home and contact page.
+
+
+

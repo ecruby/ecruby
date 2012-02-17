@@ -6,7 +6,7 @@
 # to supply the proper path to the Yahoo compressor.  
 # Set the COMPRESS flag to false to skip compression
 
-COMPRESS = true
+COMPRESS = false
 WORKING_DIR = "working"
 REMOTE_USER = "ecruby"
 REMOTE_HOST = "ecruby.org"
@@ -24,7 +24,9 @@ FILES = ["index.html",
          "resources.html",
          "meetings_and_events.html",
          "stylesheets",
-         "images"
+         "javascripts",
+         "images",
+         "camp"
         ]
 
 COMPRESSOR_CMD = 'java -jar ../bin/yuicompressor-2.4.2.jar'
