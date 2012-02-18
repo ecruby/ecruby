@@ -259,7 +259,7 @@
            @item = Item.new(params[:item])
            @item.list = @list
            if @item.save
-             redirect_to list_items_path(@item), :notice => "Item added"
+             redirect_to list_items_path(@list), :notice => "Item added"
            else
              render :action => :new
            end
@@ -411,16 +411,15 @@
    
     To make the links work properly, we have to add more JS. We can't rely on Rails' forms to do this for us. Add this to `app/assets/items.coffee` and be sure it's indented evenly with the previous code, so that it's nested within the scope of the `$ ->` 
 
-        $('#mobile_items input').on 'click', ->
-          form = $(this).closest('form')
-          $.ajax
-            url: form.attr("action")
-            dataType: "json"
-            type: "PUT"
-            data: form.serialize()
+      $('#mobile_items input').on 'click', ->
+        form = $(this).closest('form')
+        $.ajax
+          url: form.attr("action")
+          dataType: "json"
+          type: "PUT"
+          data: form.serialize()
     
-    Now visit http://localhost:3000/lists.mobile and you should be able to use the app!
-    
+    Now visit http://localhost:3000/lists.mobile and you should be able to use the app!    
     
     ## Workshop 6: Sharing With The World
 
