@@ -10,11 +10,13 @@
         rails new shoppinglist
         cd shoppinglist
 
-    Creating our first controller is as easy as using the generator. Specify the generator `controller` and then the name of the controller, followed by the names of the pages you want, separated by spaces.
+    Creating our first controller is as easy as using the `rails generate` command. Specify the generator `controller` and then the name of the controller, followed by the names of the pages you want, separated by spaces. We'll use the shorthand version of `rails generate`, which is `rails g`. Type this into your shell:
 
         rails g controller pages index about
 
-    This generates the controller and two view pages.
+    This generates the controller and two view pages. 
+    
+    
 
     Now open `app/views/pages/index.html.erb` and change the content to this:
 
@@ -120,6 +122,8 @@
           <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "About", about_path %></li>
         </ul>
+
+    But in order to use our home page properly, we have to delete the file `public/index.html` 
 
     ## Workshop 2: Lists with Scaffolding
 
