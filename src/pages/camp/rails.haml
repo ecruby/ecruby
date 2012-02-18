@@ -255,7 +255,7 @@
            @item = Item.new(params[:item])
            @item.list = @list
            if @item.save
-             redirect_to list_items_path(@item), :notice => "Item added"
+             redirect_to list_items_path(@list), :notice => "Item added"
            else
              render :action => :new
            end
