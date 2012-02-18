@@ -418,63 +418,63 @@
     Now visit http://localhost:3000/lists.mobile and you should be able to use the app!
     
     
-  ## WOrkshop 6 - Sharing With The World
+    ## Workshop 6: Sharing With The World
 
-  Heroku hosts our apps for free. But we have to use a different database.
+    Heroku hosts our apps for free. But we have to use a different database.
 
-  Open `Gemfile` and change this:
+    Open `Gemfile` and change this:
   
-      gem 'sqlite3'
-  
-  to
-
-      group :development, :test do
         gem 'sqlite3'
-      end
-      group :production do
-        gem 'pg'
-      end
+  
+    to
+
+        group :development, :test do
+          gem 'sqlite3'
+        end
+        group :production do
+          gem 'pg'
+        end
     
-  Heroku uses the `thin` web server. We'll need
-  to add this to our `Gemfile` as well:
+    Heroku uses the `thin` web server. We'll need
+    to add this to our `Gemfile` as well:
   
-      group :production do
-        gem 'thin'
-      end  
+        group :production do
+          gem 'thin'
+        end  
     
-  Then run 
+    Then run 
 
-      bundle install --without production
+        bundle install --without production
   
   
-  Then add everything to a new Git repository for deployment:
+    Then add everything to a new Git repository for deployment:
   
-      git init
-      git add .
-      git commit -m "First deployment"
+        git init
+        git add .
+        git commit -m "First deployment"
       
-  Then we create our app on Heroku - use your initials.
+    Then we create our app on Heroku - use your initials.
   
-      heroku create bphshoppinglist --stack cedar
+        heroku create bphshoppinglist --stack cedar
 
 
-      heroku info --app myapp
+        heroku info --app myapp
       
-  Then commit the app
+    Then commit the app
   
-      git push heroku master
+        git push heroku master
       
-  This pushes the app into production! But it doesn't have a database.
+    This pushes the app into production! But it doesn't have a database.
   
-      heroku run rake db:setup
+        heroku run rake db:setup
       
-  Now you can visit your site at yoursitename.herokuapps.com.
+    Now you can visit your site at yoursitename.herokuapps.com.
   
-  But there's no data, so let's push our local database up to the server!
+    But there's no data, so let's push our local database up to the server!
   
-      heroku db:push
+        heroku db:push
       
-  Now the data is up on the server.
+    Now the data is up on the server.
   
   
   
