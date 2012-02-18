@@ -456,7 +456,8 @@
     Then we create our app on Heroku - use your initials.
   
         heroku create bphshoppinglist --stack cedar
-
+   
+    We can get info about our setup with this command:
 
         heroku info --app myapp
       
@@ -476,5 +477,12 @@
       
     Now the data is up on the server.
   
-  
+    That's it! Your first app is deployed.  To make changes to your app, edit your files and redeploy the app. To redeploy, you have to commit your changes to your local Git repository and push again.
+    
+    
+        git add .
+        git commit -m "I made changes"
+        git push heroku master
+        
+    Of course, there's more to working with Rails than this, but this just gets you started.
   
