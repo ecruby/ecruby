@@ -390,7 +390,7 @@
           </ul>
         </div>
     
-    Now create a similar file to list the items of the list in `app/views/items.mobile.erb` with this content:
+    Now create a similar file to list the items of the list in `app/views/index.mobile.erb` with this content:
 
         <div data-role="header">
          <h1><%= @list.name %></h1>
@@ -400,7 +400,7 @@
          <ul id="mobile_items" data-role="listview">
            <% @items.each do |item| %>
            <li>
-             <%=form_for [@list, item], :format => "json", :remote => true do |f| %>
+             <%=form_for [@list, item], :format => "json" do |f| %>
                <%=f.check_box :done %>
                <%=f.label :done, item.name %>
              <% end %>
