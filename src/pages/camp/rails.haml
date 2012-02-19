@@ -65,7 +65,7 @@
         </body>
         </html>
 
-    Now let's add some basic CSS in application.css
+    Now let's add some basic CSS in `app/assets/application.css`
 
         #container{
           width:900px;
@@ -124,6 +124,8 @@
         </ul>
 
     But in order to use our home page properly, we have to delete the file `public/index.html` 
+    
+    Then we can visit [http://localhost:3000/](http://localhost:3000/) to see the home page.
 
     ## Workshop 2: Lists with Scaffolding
 
@@ -289,27 +291,27 @@
     
     Next, change the list of items to a form with checkboxes.
 
-        <ul>
+        <ul id="items">
           <% @items.each do |item| %>
-            <li>
-              <%=form_for [@list, item], :remote => true do |f| %>
-                <%=f.check_box :done %>
-                <%=f.label :done, item.name %>
-              <% end %>
-            </li>
+           <li>
+             <%=form_for [@list, item], :remote => true do |f| %>
+               <%=f.check_box :done, :id => "item_done_\#{item.id}" %>
+               <%=f.label :done, item.name, :value => item.id %>
+             <% end %>
+           </li>
           <% end %>
         </ul>
 
     This creates a remote form. But we don't have a submit button. We need
     to trigger the submit
 
-    Finally, add in some javascript
+    Finally, add in some javascript. For this example, we'll use CoffeeScript. In `items.js.coffee`, add this code:
 
         $ ->
           $('input').on 'click', ->
             $(this).closest('form').submit()
         
-    or in JavaScript
+    The equivalent JavaScript code for this would be 
 
         $(function() {
           $('input').on('click', function() {
@@ -317,7 +319,7 @@
           });
         });
 
-    Then use the callback to change the status message
+    This sends the response to the server, but we don't get any notification that anything happened. We can hook into a built-in callback to change the status message on the page by changing the code in `items.js.coffee` to this:
 
         $ ->
           $('input').on 'click', ->
