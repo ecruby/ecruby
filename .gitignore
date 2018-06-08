@@ -1,4 +1,5 @@
-site/*.html
+site/**/*.html
 site/**/*.css
 site/working/*
+.sass-cache
 .DS_Store

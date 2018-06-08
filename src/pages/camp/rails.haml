@@ -308,13 +308,13 @@
     Finally, add in some javascript. For this example, we'll use CoffeeScript. In `items.js.coffee`, add this code:
 
         $ ->
-          $('input').on 'click', ->
+          $('#items input').on 'click', ->
             $(this).closest('form').submit()
         
     The equivalent JavaScript code for this would be 
 
         $(function() {
-          $('input').on('click', function() {
+          $('#items input').on('click', function() {
             $(this).closest('form').submit();
           });
         });
@@ -322,7 +322,7 @@
     This sends the response to the server, but we don't get any notification that anything happened. We can hook into a built-in callback to change the status message on the page by changing the code in `items.js.coffee` to this:
 
         $ ->
-          $('input').on 'click', ->
+          $('#items input').on 'click', ->
             $(this).closest('form').on 'ajax:success', (e, data) ->
               $("#notice").html("Updated " + data.name )
             $(this).closest('form').submit()
@@ -330,7 +330,7 @@
     or in JavaScript
 
         $(function() {
-          $('input').on('click', function() {
+          $('#items input').on('click', function() {
             $(this).parent('form').on('ajax:success', function(e, data) {
               $("#notice").html("Updated " + data.name);
             });
